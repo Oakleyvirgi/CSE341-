@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+​
+<body>
+  <% include ../includes/nav.ejs %>
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1><%= title %></h1>
+    <form method="POST" action="/ta02/addUser">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" style="color:black;">
+      <button type="submit">Add Username</button>
+    </form>
+    <form method="POST" action="/ta02/removeUser">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" style="color:black;">
+      <button type="submit">Remove Username</button>
+    </form>
+    <div><%= errorMessage %></div>
+  </div>
+</div>
+<div class="container">
+  <ul>
+    <% for (let username of names) { %>
+      <li><%= username %></li>
+    <% } %>
+  </ul>
+</div>
+​
+​
+</body>
+</html>
