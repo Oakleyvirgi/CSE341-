@@ -1,14 +1,24 @@
 //TA03 PLACEHOLDER
-const express = require('express');
-const router = express.Router();
+const Product = require('../models/product');
 
-router.get('/',(req, res, next) => {
-    res.render('pages/ta03', { 
-        title: 'Team Activity 03', 
-        path: '/ta03', // For pug, EJS 
-        activeTA03: true, // For HBS
-        contentCSS: true, // For HBS
+exports.getAllProds = (req, res, next) =>{
+    Product.fetchAll((products) =>{
+        res.render('pages/ta03',{
+            prods:products,
+            pageTitle: 'All Products',
+            path: '/ta03'
+        });
     });
-});
+}
 
-module.exports = router;
+
+exports.getSearch = (req, res, next) =>{
+    const q = req.query.q.toLowerCase();
+    Product.search((q), newProducts=>{
+        res.render('pages/ta03',{
+            prods: newProducts,
+            pageTitle: 'Search result',
+            path: '/ta03'
+        });
+    });
+}
