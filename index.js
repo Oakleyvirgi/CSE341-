@@ -15,6 +15,24 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
+const mongoose = require('mongoose');
+
+const cors = require('cors') // Place this with other requires (like 'path' and 'express')
+const corsOptions = {
+    origin: "https://git.heroku.com/cse341-oakley.git",
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    family: 4
+};
+
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
 
 const app = express();
 
@@ -64,12 +82,24 @@ app.use(express.static(path.join(__dirname, 'public')))
    
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
 
-   mongoose
+mongoose
   .connect(
     MONGODB_URL, options
   )
-  .then(result => {  ... // This should be your user handling code implement following the course videos
-    app.listen(PORT);
+  .then(result => {
+      User.findOne().then(user => {
+          if(!user) {
+        const user = new User({
+          name: 'Trenton',
+          email: 'mol20003@byui.edu',
+          cart: {
+              items:[]
+          }
+      });
+    user.save();
+  }
+});
+    app.listen(process.env.PORT || 5000);
   })
   .catch(err => {
     console.log(err);
