@@ -1,14 +1,16 @@
 const path = require('path');
-
+const cors = require('cors')// Place this with other requires (like 'path' and 'express')
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const app = express();
 
 
-const cors = require('cors') // Place this with other requires (like 'path' and 'express')
+
+
 const corsOptions = {
   origin: "https://git.heroku.com/cse341-oakley.git",
   optionsSuccessStatus: 200
@@ -25,7 +27,7 @@ const options = {
 
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
 
-const app = express();
+
 
 app.set('view engine', 'ejs');
 app.set('views', 'views-week2');
