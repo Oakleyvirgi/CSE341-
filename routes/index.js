@@ -8,7 +8,7 @@ routes
     .use('./teamActivities', teamActivities)
     .use('./proveAssignments', proveActivities)
 
-    .get('./', (req, res, next) => {
+    .get('/', (req, res, next) => {
         res.render('pages/index', {title: 'Welcome to my CSE341 repo', path:'/'});
     })
     .use((req, res, next) => {

@@ -48,8 +48,8 @@ app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
    .set('view engine', 'ejs')
    .use(bodyParser({extended: false}))
-   .use('./', routes)
-   
+   .use('/', routes)
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
    // For view engine as Pug
    //.set('view engine', 'pug') // For view engine as PUG. 
    // For view engine as hbs (Handlebars)
@@ -68,7 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')))
      // 404 page
      res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
    })*/
-   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  
 
    /*const cors = require('cors') // Place this with other requires (like 'path' and 'express')...
    const corsOptions = {
