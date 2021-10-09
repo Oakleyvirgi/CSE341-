@@ -14,8 +14,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const routes = require('./routes');
 const PORT = process.env.PORT || 5000 // So we can run on heroku || (OR) localhost:5000
 const mongoose = require('mongoose');
+const app = express();
 
 const cors = require('cors') // Place this with other requires (like 'path' and 'express')
 const corsOptions = {
@@ -34,23 +36,26 @@ const options = {
 
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
 
-const app = express();
 
-// Route setup. You can implement more in the future!
+
+/* Route setup. You can implement more in the future!
 const ta01Routes = require('./routes/ta01');
 const ta02Routes = require('./routes/ta02');
 const ta03Routes = require('./routes/ta03'); 
-const ta04Routes = require('./routes/ta04'); 
+const ta04Routes = require('./routes/ta04'); */
 
 app.use(express.static(path.join(__dirname, 'public')))
    .set('views', path.join(__dirname, 'views'))
    .set('view engine', 'ejs')
+   .use(bodyParser({extended: false}))
+   .use('./', routes)
+   
    // For view engine as Pug
    //.set('view engine', 'pug') // For view engine as PUG. 
    // For view engine as hbs (Handlebars)
    //.engine('hbs', expressHbs({layoutsDir: 'views/layouts/', defaultLayout: 'main-layout', extname: 'hbs'})) // For handlebars
    //.set('view engine', 'hbs')
-   .use(bodyParser({extended: false})) // For parsing the body of a POST
+   /*.use(bodyParser({extended: false})) // For parsing the body of a POST
    .use('/ta01', ta01Routes)
    .use('/ta02', ta02Routes) 
    .use('/ta03', ta03Routes) 
@@ -62,10 +67,10 @@ app.use(express.static(path.join(__dirname, 'public')))
    .use((req, res, next) => {
      // 404 page
      res.render('pages/404', {title: '404 - Page Not Found', path: req.url})
-   })
+   })*/
    .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-   const cors = require('cors') // Place this with other requires (like 'path' and 'express')...
+   /*const cors = require('cors') // Place this with other requires (like 'path' and 'express')...
    const corsOptions = {
        origin: "https://<your_app_name>.herokuapp.com/",
        optionsSuccessStatus: 200
@@ -81,7 +86,7 @@ app.use(express.static(path.join(__dirname, 'public')))
    };
    
 const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
-
+*/
 mongoose
   .connect(
     MONGODB_URL, options
