@@ -17,12 +17,12 @@ const corsOptions = {
   const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+    //useCreateIndex: true,
+    //useFindAndModify: false,
     family: 4
   };
   
-  const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/test?retryWrites=true&w=majority";
+  const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://VirgiO:Caracas123!@cse341cluster-3dwlw.mongodb.net/shop?retryWrites=true&w=majority";
 
 //Turn on that server
 app.listen(PORT, () => {
